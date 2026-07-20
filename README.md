@@ -62,6 +62,30 @@ This repository will provide:
 - Worked examples from real STS projects
 - A versioned record of how the method evolves
 
+## Documentation and Toolkit
+
+### Canonical method
+
+- [Controlled AI Engineering Method](METHOD.md)
+
+### Reusable templates
+
+- [Milestone Record](templates/milestone.md)
+- [Human Approval Record](templates/approval-record.md)
+- [Verification Record](templates/verification-record.md)
+- [Project Status Record](templates/project-status.md)
+- [Risk Register](templates/risk-register.md)
+
+### Operational checklists
+
+- [Before-Commit Checklist](checklists/before-commit.md)
+- [Before-Deployment Checklist](checklists/before-deployment.md)
+- [High-Risk-Action Checklist](checklists/high-risk-actions.md)
+
+### Worked examples
+
+- [STS AI Lab: Per-Agent Tool Permissions](examples/sts-ai-lab/per-agent-tool-permissions.md)
+
 ## Who This Is For
 
 This method is designed for:
@@ -83,18 +107,28 @@ The method is being developed through practical use across SynthThinkingSystems 
 - STS AlertHub
 - SynthQuant control systems
 
+
 ## Current Status
 
-The repository is in its first documented milestone.
+Version `v0.1.0` established:
 
-Milestone 001 establishes:
-
-- This project introduction
-- The canonical method
+- The project introduction
+- The canonical controlled engineering method
 - A reusable milestone template
 - One worked example from STS AI Lab
 
-The method is not considered version `v0.1.0` until these materials have been reviewed and verified.
+Version `v0.2.0` adds the reusable control toolkit:
+
+- Human approval records
+- Verification records
+- Project-status records
+- Risk registers
+- Before-commit checks
+- Before-deployment checks
+- High-risk-action controls
+
+This toolkit release is complete only after it is reviewed, verified, checkpointed, published, and tagged as `v0.2.0`.
+
 
 ## Licence
 
