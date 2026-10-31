@@ -28,6 +28,16 @@ Every controlled milestone follows these stages:
 
 A stage should not be skipped merely because the implementation appears simple.
 
+### Milestone state and control gates
+
+The lifecycle is operationalised through the state machine and gate definitions in
+[`CONTROL-DESK.md`](CONTROL-DESK.md). A milestone may advance only when the required
+evidence, approval, verification, and recovery conditions for that transition are
+recorded. The Control Desk must not display a stronger state than the evidence supports.
+
+Every state transition records the previous state, new state, actor, date and time,
+reason, and linked evidence or record.
+
 ## 3. Mission
 
 State the outcome the milestone is intended to produce.

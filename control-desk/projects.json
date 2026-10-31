@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "projects": [
+    {
+      "project_id": "sts-controlled-ai-engineering",
+      "display_name": "STS Controlled AI Engineering",
+      "repository_path": "..",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    },
+    {
+      "project_id": "sts-ai-lab",
+      "display_name": "STS AI Lab",
+      "repository_path": "../../sts-ai-lab",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    },
+    {
+      "project_id": "sts-alerthub",
+      "display_name": "STS AlertHub",
+      "repository_path": "../../sts-alerthub",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    },
+    {
+      "project_id": "sts-civicos",
+      "display_name": "STS CivicOS",
+      "repository_path": "../../sts-civicos",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    },
+    {
+      "project_id": "sts-exam-control-system",
+      "display_name": "STS Exam Control System",
+      "repository_path": "../../sts-exam-control-system",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    },
+    {
+      "project_id": "sts-yoruba-rpg",
+      "display_name": "STS Yoruba RPG",
+      "repository_path": "../../sts-yoruba-rpg",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    },
+    {
+      "project_id": "synthquant-fx-control-plane",
+      "display_name": "SynthQuant FX Control Plane",
+      "repository_path": "../../synthquant-fx-control-plane",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    },
+    {
+      "project_id": "synththinking-pos",
+      "display_name": "SynthThinking POS",
+      "repository_path": "../../synththinking-pos",
+      "default_branch": "main",
+      "enabled": true,
+      "visibility": "private"
+    }
+  ]
+}

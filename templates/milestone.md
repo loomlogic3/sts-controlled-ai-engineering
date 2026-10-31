@@ -7,7 +7,38 @@
 - Milestone title:
 - Date opened:
 - Owner:
+- Accountable human:
+- Current stage: Mission
 - Status: Proposed
+- Risk level: Low / Medium / High / Critical
+- Last state transition:
+- Next permitted action:
+
+### Linked records
+
+- Approval record ID:
+- Risk record IDs:
+- Verification record ID:
+- Evidence record IDs:
+- Git checkpoint:
+- Next milestone ID:
+
+### Control health
+
+- Scope: Not assessed
+- Approval: Not assessed
+- Risks: Not assessed
+- Acceptance criteria: Not assessed
+- Evidence: Not assessed
+- Verification: Not assessed
+- Recovery: Not assessed
+- Git state: Not assessed
+
+### State-transition history
+
+| Previous state | New state | Actor and role | Date and time | Reason | Evidence or record |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
 
 ## 1. Mission
 

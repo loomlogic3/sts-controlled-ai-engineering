@@ -67,6 +67,18 @@ This repository will provide:
 ### Canonical method
 
 - [Controlled AI Engineering Method](METHOD.md)
+- [STS Control Desk Specification](CONTROL-DESK.md)
+- [File-Based Control Desk](control-desk/README.md)
+- [Control Desk Record Schema](control-desk/schema.md)
+- [Control Desk Validator](control-desk/validate.py)
+- [Control Desk Read-Only Index](control-desk/index.py)
+- [Control Desk Presentation Contract](control-desk/presentation.md)
+- [Control Desk HTML Renderer](control-desk/render.py)
+- [SQLite Cross-Project Evaluation](control-desk/sqlite-evaluation.md)
+- [SQLite Project Registry](control-desk/projects.json)
+- [SQLite Read-Only Indexer](control-desk/index_sqlite.py)
+- [STS Project Discovery](control-desk/discover_projects.py)
+- [Control Desk Validator](control-desk/validate.py)
 
 ### Reusable templates
 
