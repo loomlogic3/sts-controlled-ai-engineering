@@ -217,4 +217,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 control-desk/*.sqlite3
+control-desk/*.sqlite3-journal
 control-desk/dashboard.html
+control-desk/observation.json
+control-desk/analysis.json
