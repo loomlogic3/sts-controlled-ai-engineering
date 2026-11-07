@@ -105,7 +105,7 @@ def schema(connection: sqlite3.Connection) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--registry", type=Path, default=Path(__file__).with_name("projects.json"))
-    parser.add_argument("--database", required=True, help="SQLite path, or :memory: for a non-persistent dry run")
+    parser.add_argument("--database", type=Path, default=Path(__file__).with_name("control-desk.sqlite3"), help="SQLite path, or :memory: for a non-persistent dry run")
     args = parser.parse_args()
 
     registry = json.loads(args.registry.read_text(encoding="utf-8"))
