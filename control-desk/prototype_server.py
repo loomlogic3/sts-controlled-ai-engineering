@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Run a local-only, read-only tenant-scoped prototype over the SQLite projection."""
+"""Run a local-only, read-only tenant-scoped prototype over the SQLite projection.
+
+Instructions:
+    python3 control-desk/prototype_server.py --database control-desk/control-desk.sqlite3 --port 8766
+"""
 
 from __future__ import annotations
 
@@ -70,7 +74,11 @@ class PrototypeHandler(BaseHTTPRequestHandler):
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="Example:\n  python3 control-desk/prototype_server.py --database control-desk/control-desk.sqlite3 --port 8766"
+    )
     parser.add_argument("--database", type=Path, default=Path(__file__).with_name("control-desk.sqlite3"))
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8766)

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Render the file-based Control Desk as a read-only HTML document."""
+"""Render the file-based Control Desk as a read-only HTML document.
+
+Instructions:
+    python3 control-desk/render.py --database control-desk/control-desk.sqlite3 > control-desk/dashboard.html
+"""
 
 from __future__ import annotations
 
@@ -8,7 +12,10 @@ import json
 import re
 import sqlite3
 import argparse
+import signal
 from pathlib import Path
+
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
 ROOT = Path(__file__).resolve().parent
@@ -257,7 +264,11 @@ def source_label(path: Path) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="Example:\n  python3 control-desk/render.py --database control-desk/control-desk.sqlite3 > control-desk/dashboard.html"
+    )
     parser.add_argument("--database", type=Path, default=ROOT / "control-desk.sqlite3", help="Read active records from a SQLite projection")
     args = parser.parse_args()
     all_records = records(args.database)

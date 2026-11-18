@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build a read-only, rebuildable SQLite projection of registered STS projects."""
+"""Build a read-only, rebuildable SQLite projection of registered STS projects.
+
+Instructions:
+    python3 control-desk/index_sqlite.py --database control-desk/control-desk.sqlite3
+"""
 
 from __future__ import annotations
 
@@ -103,7 +107,11 @@ def schema(connection: sqlite3.Connection) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="Example:\n  python3 control-desk/index_sqlite.py --database control-desk/control-desk.sqlite3"
+    )
     parser.add_argument("--registry", type=Path, default=Path(__file__).with_name("projects.json"))
     parser.add_argument("--database", type=Path, default=Path(__file__).with_name("control-desk.sqlite3"), help="SQLite path, or :memory: for a non-persistent dry run")
     args = parser.parse_args()
