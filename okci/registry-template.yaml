@@ -1,0 +1,108 @@
+# OKCI command-record template.
+# This is an unverified starting point, not a command registry or an approval.
+# Replace every [PLACEHOLDER ...] value after the applicable STS review.
+
+identity:
+  # Placeholder only; supply a stable, registry-unique command-variant ID.
+  command_id: "[PLACEHOLDER: stable command ID]"
+  # Placeholder only; confirm the record revision.
+  record_version: 1
+  # Placeholder only; confirm the applicable contract/schema compatibility level.
+  schema_version: 1
+
+command_definition:
+  name: "[PLACEHOLDER: descriptive command-variant name]"
+  purpose: "[PLACEHOLDER: plain-language intended outcome; not execution evidence]"
+  syntax:
+    # Illustrative placeholder; select only after exact syntax is known.
+    kind: template
+    command_text: "[PLACEHOLDER: exact or bounded command text; redact secrets]"
+    executable: "[PLACEHOLDER: executable or interpreter]"
+    arguments: "[PLACEHOLDER: arguments and argument constraints]"
+    shell: "[PLACEHOLDER: shell/interpreter, or explicitly none]"
+    invocation_constraints:
+      - "[PLACEHOLDER: quoting, redirection, pipeline, globbing, substitution, retry, and related limits]"
+  expected_results:
+    - "[PLACEHOLDER: observable intended outcome; not a claim that it occurred]"
+  verification_procedure: "[PLACEHOLDER: checks for target, scope, evidence, and Control Desk handoff]"
+  failure_conditions:
+    - "[PLACEHOLDER: stop, escalation, or reassessment condition]"
+
+classification:
+  # Illustrative enum values only; replace after assessing the exact command and context.
+  operation:
+    - OBSERVE
+  effects:
+    - FILESYSTEM_READ
+  # Empty is structurally allowed, but requires contextual justification.
+  risk_flags: []
+  approval_requirement: NONE
+  reversibility: REVERSIBLE
+  secret_handling: NONE
+  service_impact: NONE
+
+execution_context:
+  prerequisites:
+    - "[PLACEHOLDER: required tool/version, files/state, permissions, authentication, and human checks]"
+  working_directory:
+    required: "[PLACEHOLDER: required repository, subdirectory, or external context]"
+    rule: "[PLACEHOLDER: working-directory rule and boundary]"
+    path_constraint: "[PLACEHOLDER: typed path constraint, or remove if not applicable]"
+
+target_constraints:
+  target_scope:
+    kind: "[PLACEHOLDER: target kind]"
+    target: "[PLACEHOLDER: exact or bounded target identity]"
+    constraints:
+      - "[PLACEHOLDER: target and scope constraint]"
+    exclusions:
+      - "[PLACEHOLDER: excluded target or scope]"
+    permissions: "[PLACEHOLDER: required permissions and boundary]"
+    authentication_boundary: "[PLACEHOLDER: authentication boundary; do not include credentials]"
+    recovery_boundary: "[PLACEHOLDER: recovery boundary and limits]"
+
+environment_compatibility:
+  # Placeholder environment entry; NOT_ASSESSED is not a compatibility claim.
+  "[PLACEHOLDER: environment key]":
+    status: NOT_ASSESSED
+    shell: "[PLACEHOLDER: shell, if assessed]"
+    executable: "[PLACEHOLDER: executable, if assessed]"
+    version_constraints: "[PLACEHOLDER: version constraints, if assessed]"
+    conditions: "[PLACEHOLDER: material conditions, if assessed]"
+    references: []
+
+verification_projection:
+  verification_status: PROPOSED
+  last_verified: null
+  review_due: null
+  stale_reason: null
+
+references:
+  control_desk_records: []
+  repository_files: []
+  project_documentation: []
+  external_documentation: []
+  okci_records: []
+
+provenance:
+  source:
+    # Clearly identified placeholder source-origin record; not a source claim or evidence.
+    - origin_type: "[PLACEHOLDER: source-origin classification]"
+      description: "[PLACEHOLDER: what information this origin contributed]"
+      scope: "[PLACEHOLDER: bounded claims or knowledge contributed]"
+      locator: null
+      revision: null
+  recorded_by: "[PLACEHOLDER: person, process, or role that recorded this metadata]"
+  # Illustrative schema-valid timestamp only; replace when this metadata is recorded.
+  recorded_at: "1970-01-01T00:00:00Z"
+  review_history: []
+
+lifecycle:
+  deprecated_at: null
+  deprecation_reason: null
+  replacement_command_id: null
+  migration_limitations: null
+
+limitations:
+  - "[PLACEHOLDER: unknowns, exclusions, unsupported targets, redaction limits, or non-guarantees]"
+  - "This template contains no command-specific verification evidence, compatibility claim, approval decision, or execution result."

@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sts-controlled-ai-engineering.invalid/okci/command-record.schema.json",
+  "title": "OKCI Command Record",
+  "description": "Structural schema for the STS-OKCI-001 File 1 command-record contract. Schema validity does not establish authorization, verification, freshness, compatibility, safety, or execution success.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "identity",
+    "command_definition",
+    "classification",
+    "execution_context",
+    "target_constraints",
+    "environment_compatibility",
+    "verification_projection",
+    "references",
+    "provenance",
+    "lifecycle",
+    "limitations"
+  ],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command_id", "record_version", "schema_version"],
+      "properties": {
+        "command_id": {"type": "string", "minLength": 1},
+        "record_version": {"type": "integer", "minimum": 1},
+        "schema_version": {"type": "integer", "minimum": 1}
+      }
+    },
+    "command_definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "purpose",
+        "syntax",
+        "expected_results",
+        "verification_procedure",
+        "failure_conditions"
+      ],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "purpose": {"type": "string", "minLength": 1},
+        "syntax": {
+          "type": "object",
+          "description": "Conceptual syntax structure; the contract does not define a closed property set for it.",
+          "properties": {
+            "kind": {"enum": ["exact", "constrained", "template"]}
+          }
+        },
+        "expected_results": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "verification_procedure": {"type": "string", "minLength": 1},
+        "failure_conditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation",
+        "effects",
+        "risk_flags",
+        "approval_requirement",
+        "reversibility",
+        "secret_handling",
+        "service_impact"
+      ],
+      "properties": {
+        "operation": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": ["OBSERVE", "INSPECT", "ANALYZE", "PREPARE", "MODIFY", "EXECUTE"]
+          },
+          "uniqueItems": true
+        },
+        "effects": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": ["FILESYSTEM_READ", "FILESYSTEM_WRITE", "NETWORK_ACCESS", "PRIVILEGED_ACCESS", "PROCESS_CREATION", "EXTERNAL_STATE_CHANGE"]
+          },
+          "uniqueItems": true
+        },
+        "risk_flags": {
+          "type": "array",
+          "items": {
+            "enum": ["DESTRUCTIVE", "SECRET_EXPOSURE", "DATA_LOSS", "EXTERNAL_PUBLICATION", "SERVICE_DISRUPTION"]
+          },
+          "uniqueItems": true
+        },
+        "approval_requirement": {
+          "enum": ["NONE", "HUMAN_APPROVAL_REQUIRED", "EXPLICIT_HIGH_RISK_APPROVAL"]
+        },
+        "reversibility": {
+          "enum": ["REVERSIBLE", "RECOVERABLE", "PARTIALLY_REVERSIBLE", "IRREVERSIBLE"]
+        },
+        "secret_handling": {
+          "enum": ["NONE", "INDIRECT_ONLY", "SENSITIVE_OUTPUT_POSSIBLE", "PROHIBITED"]
+        },
+        "service_impact": {
+          "enum": ["NONE", "LOCAL_ONLY", "DEGRADED", "OUTAGE_POSSIBLE"]
+        }
+      }
+    },
+    "execution_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prerequisites", "working_directory"],
+      "properties": {
+        "prerequisites": {
+          "type": "array",
+          "minItems": 1,
+          "items": {}
+        },
+        "working_directory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "rule"],
+          "properties": {
+            "required": {},
+            "rule": {"type": "string", "minLength": 1},
+            "path_constraint": {}
+          }
+        }
+      }
+    },
+    "target_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_scope"],
+      "properties": {
+        "target_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "target",
+            "constraints",
+            "exclusions",
+            "permissions",
+            "authentication_boundary",
+            "recovery_boundary"
+          ],
+          "properties": {
+            "kind": {},
+            "target": {},
+            "constraints": {},
+            "exclusions": {},
+            "permissions": {},
+            "authentication_boundary": {},
+            "recovery_boundary": {}
+          }
+        }
+      }
+    },
+    "environment_compatibility": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["status", "references"],
+        "properties": {
+          "profile_ref": {"type": "string", "minLength": 1},
+          "status": {
+            "enum": ["SUPPORTED", "CONDITIONAL", "UNSUPPORTED", "NOT_ASSESSED"]
+          },
+          "shell": {"type": "string", "minLength": 1},
+          "executable": {"type": "string", "minLength": 1},
+          "version_constraints": {},
+          "conditions": {},
+          "references": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      }
+    },
+    "verification_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verification_status", "last_verified", "review_due", "stale_reason"],
+      "properties": {
+        "verification_status": {
+          "enum": ["VERIFIED", "PROJECT-DOCUMENTED", "HISTORICAL", "PROPOSED", "DEPRECATED", "BLOCKED"]
+        },
+        "last_verified": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "review_due": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "stale_reason": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"verification_status": {"enum": ["HISTORICAL", "BLOCKED"]}}},
+          "then": {"properties": {"stale_reason": {"type": "string", "minLength": 1}}}
+        }
+      ]
+    },
+    "references": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "control_desk_records",
+        "repository_files",
+        "project_documentation",
+        "external_documentation",
+        "okci_records"
+      ],
+      "properties": {
+        "control_desk_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "record_id", "support_scope"],
+            "properties": {
+              "type": {"type": "string", "minLength": 1},
+              "record_id": {"type": "string", "minLength": 1},
+              "section_or_claim": {"type": "string", "minLength": 1},
+              "support_scope": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "repository_files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "path", "support_scope"],
+            "properties": {
+              "type": {"const": "repository_file"},
+              "path": {"type": "string", "minLength": 1},
+              "section_or_claim": {"type": "string", "minLength": 1},
+              "support_scope": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "project_documentation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "path_or_locator", "support_scope"],
+            "properties": {
+              "type": {"const": "project_documentation"},
+              "path_or_locator": {"type": "string", "minLength": 1},
+              "section_or_claim": {"type": "string", "minLength": 1},
+              "support_scope": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "external_documentation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "locator", "support_scope"],
+            "properties": {
+              "type": {"const": "external_documentation"},
+              "locator": {"type": "string", "minLength": 1},
+              "title_or_publisher": {"type": "string", "minLength": 1},
+              "section_or_claim": {"type": "string", "minLength": 1},
+              "support_scope": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "okci_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "record_id", "support_scope"],
+            "properties": {
+              "type": {"const": "okci_record"},
+              "record_id": {"type": "string", "minLength": 1},
+              "section_or_claim": {"type": "string", "minLength": 1},
+              "support_scope": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "recorded_by", "recorded_at", "review_history"],
+      "properties": {
+        "source": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["origin_type", "description", "scope"],
+            "properties": {
+              "origin_type": {"type": "string", "minLength": 1},
+              "description": {"type": "string", "minLength": 1},
+              "scope": {"type": "string", "minLength": 1},
+              "locator": {"type": ["string", "null"], "minLength": 1},
+              "revision": {"type": ["string", "null"], "minLength": 1}
+            }
+          }
+        },
+        "recorded_by": {"type": "string", "minLength": 1},
+        "recorded_at": {"type": "string", "format": "date-time"},
+        "review_history": {
+          "type": "array",
+          "description": "Entry structure is intentionally not closed because the contract defines the collection semantics but not entry field names.",
+          "items": {"type": "object"}
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deprecated_at",
+        "deprecation_reason",
+        "replacement_command_id",
+        "migration_limitations"
+      ],
+      "properties": {
+        "deprecated_at": {"type": ["string", "null"], "format": "date-time"},
+        "deprecation_reason": {"type": ["string", "null"], "minLength": 1},
+        "replacement_command_id": {"type": ["string", "null"], "minLength": 1},
+        "migration_limitations": {
+          "type": ["array", "null"],
+          "items": {}
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"deprecated_at": {"type": "string"}}},
+          "then": {"properties": {"deprecation_reason": {"type": "string", "minLength": 1}}}
+        }
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}
