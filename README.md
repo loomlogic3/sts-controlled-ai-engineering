@@ -53,7 +53,7 @@ Each stage creates a control boundary. Work should not advance merely because an
 
 ## What This Repository Contains
 
-This repository will provide:
+This repository provides:
 
 - The canonical STS Controlled AI Engineering method
 - Reusable milestone and approval templates
@@ -61,6 +61,8 @@ This repository will provide:
 - Risk-classification guidance
 - Worked examples from real STS projects
 - A versioned record of how the method evolves
+- A read-only, evidence-backed Control Desk for project records
+- The initial OKCI command-record contract and structural schema
 
 ## Documentation and Toolkit
 
@@ -78,7 +80,10 @@ This repository will provide:
 - [SQLite Project Registry](control-desk/projects.json)
 - [SQLite Read-Only Indexer](control-desk/index_sqlite.py)
 - [STS Project Discovery](control-desk/discover_projects.py)
-- [Control Desk Validator](control-desk/validate.py)
+- [OKCI Architecture and Classification](okci/architecture-and-classification.md)
+- [OKCI Command-Record Contract](okci/command-record-contract.md)
+- [OKCI Command-Record Schema](okci/schema/command-record.schema.json)
+- [OKCI Registry Template](okci/registry-template.yaml)
 
 ### Reusable templates
 
@@ -140,6 +145,12 @@ Version `v0.2.0` adds the reusable control toolkit:
 - High-risk-action controls
 
 This toolkit release is complete only after it is reviewed, verified, checkpointed, published, and tagged as `v0.2.0`.
+
+The current `main` branch also contains the Control Desk and OKCI foundation
+work that followed `v0.2.0`. The current repository state must be checked with
+Git before making claims about a later release. At the latest review, the
+branch matched `origin/main`, while twelve OKCI assessment reports remained
+untracked and had not been included in a checkpoint.
 
 
 ## Licence

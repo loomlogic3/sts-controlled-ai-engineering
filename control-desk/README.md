@@ -2,7 +2,7 @@
 
 This directory defines the initial repository-native storage model for the STS Control Desk.
 
-Markdown is the authoritative human-readable record. Structured metadata is stored in YAML front matter so a future read-only desk, validator, or SQLite index can consume the records without changing their meaning.
+Markdown is the authoritative human-readable record. Structured metadata is stored in YAML front matter so read-only desk, validator, or SQLite projection tools can consume the records without changing their meaning.
 
 ## Proposed layout
 
@@ -82,7 +82,12 @@ python3 control-desk/index_sqlite.py --database control-desk/control-desk.sqlite
 python3 control-desk/render.py --database control-desk/control-desk.sqlite3 > control-desk/dashboard.html
 ```
 
-The SQLite database and generated HTML are rebuildable artifacts. They are not authoritative and should remain uncommitted unless a separate publication milestone explicitly requires an artifact snapshot.
+The SQLite database and generated HTML are rebuildable artifacts. The indexer
+is read-only with respect to registered source repositories, but it writes the
+derived SQLite projection; the renderer writes HTML when shell redirection is
+used. Neither artifact is authoritative, and both should remain uncommitted
+unless a separate publication milestone explicitly requires an artifact
+snapshot.
 
 Controlled discovery uses [`discovery.json`](discovery.json), project manifests named `.sts-project.json`, and the read-only [`discover_projects.py`](discover_projects.py). Discovery reports candidates; a human must approve onboarding into `projects.json`.
 

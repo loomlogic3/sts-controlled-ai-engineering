@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 
 
@@ -18,6 +19,13 @@ ALLOWED_STATUSES = {
     "blocked", "rejected", "paused", "cancelled", "requires_rework",
     "pending", "approved_with_conditions", "deferred", "revoked", "expired",
     "open", "closed", "in_progress", "verified", "failed",
+}
+ALLOWED_RISK_LEVELS = {"low", "medium", "high", "critical"}
+ALLOWED_STAGES = {
+    "mission", "current_state", "problem", "scoped", "out_of_scope",
+    "risks", "acceptance_criteria", "human_approval", "executing",
+    "verifying", "git_checkpoint", "lessons_learned", "next_milestone",
+    "approved", "checkpoint_ready", "complete",
 }
 
 
@@ -58,6 +66,20 @@ def validate_record(path: Path) -> list[str]:
     status = values.get("status", "")
     if status and status not in ALLOWED_STATUSES:
         errors.append(f"{path}: unsupported status '{status}'")
+    for field in ("created_at", "updated_at"):
+        value = values.get(field)
+        if value:
+            try:
+                datetime.fromisoformat(value.replace("Z", "+00:00"))
+            except ValueError:
+                errors.append(f"{path}: field '{field}' is not an ISO 8601 timestamp")
+    if record_type == "milestone":
+        risk_level = values.get("risk_level", "")
+        if risk_level not in ALLOWED_RISK_LEVELS:
+            errors.append(f"{path}: unsupported or missing milestone risk_level '{risk_level}'")
+        current_stage = values.get("current_stage", "")
+        if current_stage not in ALLOWED_STAGES:
+            errors.append(f"{path}: unsupported or missing milestone current_stage '{current_stage}'")
     if record_type == "milestone" and values.get("milestone_id") != record_id:
         errors.append(f"{path}: milestone_id must match id for milestone records")
     return errors
