@@ -67,12 +67,15 @@ def validate_record(path: Path) -> list[str]:
     if status and status not in ALLOWED_STATUSES:
         errors.append(f"{path}: unsupported status '{status}'")
     for field in ("created_at", "updated_at"):
-        value = values.get(field)
-        if value:
-            try:
-                datetime.fromisoformat(value.replace("Z", "+00:00"))
-            except ValueError:
-                errors.append(f"{path}: field '{field}' is not an ISO 8601 timestamp")
+        value = values.get(field, "")
+        if not value:
+            errors.append(f"{path}: field '{field}' must not be empty")
+            continue
+
+        try:
+            datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            errors.append(f"{path}: field '{field}' is not an ISO 8601 timestamp")
     if record_type == "milestone":
         risk_level = values.get("risk_level", "")
         if risk_level not in ALLOWED_RISK_LEVELS:
